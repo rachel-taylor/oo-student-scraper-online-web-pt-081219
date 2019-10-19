@@ -5,15 +5,17 @@ class Scraper
 
   def self.scrape_index_page(index_url)
     scraped_students = []
-    html = open(https://learn-co-curriculum.github.io/student-scraper-test-page/index.html)
-    index = Nokogiri::HTML(html)
-    index.css("div.student-card").each do |student|
-      scraped_students[:name] = student.css("h4.student-name").text
-      scraped_students[:location] = student.css("p.student-location").text
-      profile_path = student.css("a").attribute("href").value
-      scraped_students[:profile_url] = './fixtures/student-site/' + profile_path
-      students << student_details
-    end
+     page = Nokogiri::HTML(open(index_url))
+
+    page.css("div.student-card").each do |student|
+      name = student.css(".student-name").text
+      location = student.css(".student-location").text
+      profile_url = student.css("a").attribute("href").value
+      student_info = {:name => name,
+                :location => location,
+                :profile_url => profile_url}
+      students << student_info
+      end
     students
   end
 
