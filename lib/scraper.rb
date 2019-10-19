@@ -5,7 +5,7 @@ class Scraper
 
   def self.scrape_index_page(index_url)
     scraped_students = []
-    html = open(index_url)
+    html = open(https://learn-co-curriculum.github.io/student-scraper-test-page/index.html)
     index = Nokogiri::HTML(html)
     index.css("div.student-card").each do |student|
       scraped_students[:name] = student.css("h4.student-name").text
